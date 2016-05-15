@@ -2,9 +2,90 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $facebook_color: #365899;
+$facebook_color_dark: #4267b2;
+$gray: #e9ebee;
+$gray_dark: #90949c;
+
+html body {
+  background: {
+    color: $gray;
+  }
+}
 
 nav {
   background: {
-    color: $facebook_color
+    color: $facebook_color;
+  }
+}
+
+#create {
+  background: {
+    color: white;
+  }
+  padding: 1rem 0;
+  .icon {
+    color: white;
+    padding: 2px;
+    background: {
+      color: $facebook_color;
+    }
+    border: {
+      radius: 5px;
+    }
+  }
+  p {
+    margin: 0;
+    padding: 0.5rem;
+    border: {
+      bottom: solid 2px $gray;
+    }
+  }
+  button {
+    color: white;
+    padding: 0 16px;
+    margin: 1rem 1rem 0;
+    background: {
+      color: $facebook_color_dark;
+    }
+    border: solid 1px {
+      color: #435a8b #3c5488 #334c83;
+      radius: 2px;
+    }
+  }
+  div.row {
+    margin: 0;
+  }
+}
+
+textarea.materialize-textarea {
+  border-bottom: none;
+  &:focus:not([readonly]) {
+    border-bottom: none;
+    box-shadow: none;
+  }
+}
+
+.posting {
+  padding: 1rem 0;
+  background: {
+    color: white;
+  }
+  p.user_email {
+    color: $facebook_color;
+    margin: 0;
+  }
+  p.posting_time {
+    color: $gray_dark;
+    margin: {
+      top: 0;
+    }
+  }
+  div.content {
+    border: {
+      bottom: solid 2px $gray;
+    }
+    margin: {
+      bottom: 1rem;
+    }
   }
 }
