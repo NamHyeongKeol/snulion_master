@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
   root 'home#index'
   get 'home/index'
+
+  post 'posting' => 'posting#create'
+  post 'liking/:id' => 'posting#liking', as: 'liking'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

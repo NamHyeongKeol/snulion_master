@@ -1,29 +1,46 @@
 <div class="container">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
   <div class="row">
     <div class="col s12">
 
-      <%= form_tag 'somewhere', id: 'create', class: 'row' do %>
+      <%= form_tag posting_path, id: 'create', class: 'row' do %>
         <div class="col s12">
           <p><i class="tiny material-icons icon">create</i> 상태 업데이트</p>
-          <p class="input-field"><textarea name="content" class="materialize-textarea" placeholder="무슨 생각을 하고 계신가요?"></textarea></p>
+          <p class="input-field">
+            <%= text_area_tag :content, nil, class: 'materialize-textarea', placeholder: '무슨 생각을 하고 계신가요?' %>
+          </p>
           <div class="row">
             <button class="right">올리기</button>
           </div>
         </div>
       <% end %>
 
-      <div class="row posting">
-        <div class="col s12">
-          <p class="user_email">snu@likelion.net</p>
-          <p class="posting_time">3시간</p>
-          <div class="content">
-            <p>난... ㄱㅏ끔...<br>눈물을 흘린ㄷㅏ...</p>
+      <% @postings.each do |p|  %>
+        <div class="row posting">
+          <div class="col s12">
+            <p class="user_email"><%= p.writer.email %></p>
+            <p class="posting_time"><%= ((Time.now - p.created_at)/1.hour).round %>시간 전</p>
+            <div class="content">
+              <%= simple_format(p.content) %>
+            </div>
           </div>
+          <div class="col s12 like_div">
+            <%= link_to liking_path(p.id), class: "like_btn #{if current_user.likees.include? p then :liked else :unliked end}", method: 'post' do %>
+              <i class="tiny material-icons">thumb_up</i> 좋아요
+            <% end %>
+          </div>
+          <% unless p.likers.empty? %>
+            <div class="col s12 liker_list">
+              <i class="material-icons">thumb_up</i>
+              <% p.likers.each do |l| %>
+                <%= l.email %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-        <div class="col s12">
-          <!-- 좋아요 버튼 -->
-        </div>
-      </div>
+      <% end %>
 
     </div>
   </div>
