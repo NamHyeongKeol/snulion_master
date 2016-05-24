@@ -27,18 +27,13 @@
             </div>
           </div>
           <div class="col s12 like_div">
-            <%= link_to liking_path(p.id), class: "like_btn #{if current_user.likees.include? p then :liked else :unliked end}", method: 'post' do %>
+            <%= link_to liking_path(p.id), class: "like_btn #{if current_user.likees.include? p then :liked else :unliked end}", method: 'post', remote: true, id: "like_btn_#{p.id}" do %>
               <i class="tiny material-icons">thumb_up</i> 좋아요
             <% end %>
           </div>
-          <% unless p.likers.empty? %>
-            <div class="col s12 liker_list">
-              <i class="material-icons">thumb_up</i>
-              <% p.likers.each do |l| %>
-                <%= l.email %>
-              <% end %>
-            </div>
-          <% end %>
+          <div id="liker_wrap<%= p.id %>">
+            <%= render partial: 'posting/liker_list', locals: {p: p}%>
+          </div>
         </div>
       <% end %>
 

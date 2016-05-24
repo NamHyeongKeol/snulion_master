@@ -7,12 +7,11 @@ class PostingController < ApplicationController
   end
 
   def liking
-    posting = Posting.find(params[:id].to_i)
-    if posting.likers.include? current_user
-      posting.likers.delete(current_user)
+    @posting = Posting.find(params[:id].to_i)
+    if @posting.likers.include? current_user
+      @posting.likers.delete(current_user)
     else
-      posting.likers << current_user
+      @posting.likers << current_user
     end
-    redirect_to :back
   end
 end

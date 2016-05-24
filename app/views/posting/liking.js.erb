@@ -1,0 +1,8 @@
+$('#liker_wrap<%= @posting.id %>').html('<%= escape_javascript(render partial: 'posting/liker_list', locals: {p: @posting}) %>');
+<% if current_user.likees.include? @posting %>
+    $('#like_btn_<%= @posting.id %>').removeClass('unliked');
+    $('#like_btn_<%= @posting.id %>').addClass('liked');
+<% else %>
+    $('#like_btn_<%= @posting.id %>').addClass('unliked');
+    $('#like_btn_<%= @posting.id %>').removeClass('liked');
+<% end %>
